@@ -13,7 +13,9 @@ class Album extends Component {
     this.state = {
       album: album,
       currentSong: album.songs[0],
-      isPlaying: false
+      test: album.songs.title,
+      isPlaying: false,
+      isHovering: false
     };
 
     this.audioElement = document.createElement('audio');
@@ -40,8 +42,36 @@ class Album extends Component {
     if (this.state.isPlaying && isSameSong) {
       this.pause();
     } else {
-      if (!isSameSong) { this.setSong(song); }  
+      if (!isSameSong) { this.setSong(song); }
       this.play();
+    }
+
+  }
+  playAppear(index) {
+    this.setState({isHovering: true});
+  }
+
+  numberAppear() {
+    this.setState({isHovering: false});
+  }
+
+  handlePlayAppear(song, index) {
+    const isSameSong = this.state.currentSong === song;
+    const displayPlayIcon = <ion-icon name="play" onMouseEnter={() => this.playAppear()} onMouseLeave={() => this.numberAppear()}></ion-icon>
+    const displayPauseIcon = <ion-icon name="pause" onMouseEnter={() => this.playAppear()} onMouseLeave={() => this.numberAppear()}></ion-icon>
+    const displayTrackNumber = <span className="trackNumber"onMouseEnter={() => this.playAppear()} onMouseLeave={() => this.numberAppear()}>{index + 1}</span>
+
+    if (this.state.isHovering && !isSameSong) {
+      return displayPlayIcon;
+    }
+    if (this.state.isPlaying && isSameSong) {
+      return displayPauseIcon;
+    }
+    if (this.state.isPlaying === false && isSameSong) {
+      return displayPlayIcon;
+    }
+    if (!isSameSong) {
+      return displayTrackNumber;
     }
   }
 
@@ -64,13 +94,14 @@ class Album extends Component {
               </colgroup>
               <tbody>
               { this.state.album.songs.map( (song, index) =>
-                    <tr className="song" key={index} onClick={() => this.handleSongClick(song)} >
-                    <td>{index + 1}</td>
-                    <td>{song.title}</td>
-                    <td>{song.duration}</td>
+                    <tr className="song" key={index} onClick={() => this.handleSongClick(song)}>
+                      <td>{this.handlePlayAppear(song, index)}</td>
+                      <td>{song.title}</td>
+                      <td>{song.duration}</td>
                   </tr>
                 )
               }
+
               </tbody>
           </table>
       </section>
