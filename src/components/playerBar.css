@@ -1,0 +1,145 @@
+#buttons {
+  display: inline;
+  background-color: #B98BFF;
+  border-style: outset;
+  border-color: #B98BFF;
+  padding: 10px 25px 10px 75px;
+}
+
+#previous {
+  color: white;
+  position: relative;
+  left: -25px;
+  top: 2px;
+
+}
+
+#previous:hover {
+  color: #FF0476;
+}
+
+#next {
+  color: white;
+  position: relative;
+  left: -25px;
+  top: 2px;
+}
+
+#next:hover {
+  color: #FF0476;
+}
+
+#play-pause {
+  color: white;
+  position: relative;
+  left: -25px;
+  top: 2px;
+}
+
+#play-pause:hover {
+  color: #FF0476;
+}
+
+.seek-bar {
+    -webkit-appearance: none;
+    width: 250px;
+    height: 15px;
+    position: relative;
+    top: 25px;
+    border-radius: 5px;
+    background: #FFFFAA;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.seek-bar:hover {
+    opacity: 1;
+}
+
+.seek-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: orange;
+    cursor: pointer;
+}
+
+.seek-bar::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: orange;
+    cursor: pointer;
+}
+
+.volume-bar {
+    -webkit-appearance: none;
+    width: 250px;
+    height: 15px;
+    border-radius: 5px;
+    background: #FFFFAA;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.volume-bar:hover {
+    opacity: 1;
+}
+
+.volume-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: orange;
+    cursor: pointer;
+}
+
+.volume-bar::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: orange;
+    cursor: pointer;
+}
+
+#time-control {
+  color: white;
+}
+
+#volume-control {
+  color: white;
+  position: relative;
+  top: 10px;
+}
+
+.total-time {
+  position: relative;
+  left: 145px;
+  top: 2px;
+}
+
+.current-time {
+  position: relative;
+  right: 145px;
+  top: 45px;
+}
+
+#low {
+  font-size: 30px;
+  position: relative;
+  top: 8px;
+}
+
+#high {
+  font-size: 30px;
+  position: relative;
+  top: 8px;
+}

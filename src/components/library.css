@@ -1,0 +1,42 @@
+
+* {box-sizing: border-box;}
+
+img {
+  height: auto;
+  width: 100%;
+  position: relative;
+}
+
+#albumButton {
+  font-size: 2vw;
+}
+
+#albumButton:hover {
+  opacity: 0.75;
+}
+
+#albumTitle {
+  font-size: 2.5vw;
+  font-weight: bolder;
+}
+
+#albumArtist {
+  font-style: oblique;
+}
+
+.library {
+  position: relative;
+  padding-right: 40px;
+  top: 68px;
+  background-color: black;
+}
+
+.library > link {
+  background-color: black;
+  color: red;
+}
+
+.library {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}

@@ -1,0 +1,46 @@
+.album {
+  position: relative;
+  top: 100px;
+}
+
+#album-cover-art {
+  height: 300px;
+  width: auto;
+  position: relative;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.album-details {
+  background: linear-gradient(#FFFFAA, orange);
+}
+
+#song-list {
+  color: white;
+  padding: 50px 50px 10px 50px;
+}
+
+#songTitle {
+ border-bottom: double;
+ border-color: #FFFFAA;
+}
+
+#time {
+ border-bottom: double;
+ border-color: orange;
+}
+
+#song-number-column {
+  background: linear-gradient(orange, #FFFFAA);
+}
+
+#songTitle {
+  text-align: left;
+  padding: 10px 60% 10px 10px;
+  width: 100%;
+}
+#index {
+  color: black;
+  font-family: fantasy;
+  padding: 5px 5px 5px 5px;
+}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import albumData from './../data/albums';
 import PlayerBar from './PlayerBar';
+import './album.css';
 
 class Album extends Component {
 
@@ -19,7 +20,8 @@ class Album extends Component {
       duration: album.songs[0].duration,
       currentVolume: 50,
       isPlaying: false,
-      isHovering: false
+      isHovering: false,
+      currentTargetIndex: 0
     };
 
     this.audioElement = document.createElement('audio');
@@ -51,6 +53,9 @@ class Album extends Component {
     }
     let minutes = newTime / 60;
     let seconds = newTime % 60;
+    if (seconds < 10) {
+      return parseInt(minutes) + ":0" + parseInt(seconds)
+    }
     return parseInt(minutes) + ":" + parseInt(seconds)
   }
 
@@ -62,8 +67,9 @@ class Album extends Component {
   }
 
   handleVolumeChange(e) {
-    this.setState({currentVolume: e.target.value});
-    this.audioElement.volume = this.state.currentVolume / 100;
+    let volumeLevel = e.target.value
+    this.setState({currentVolume: volumeLevel});
+    this.audioElement.volume = volumeLevel / 100;
   }
 
   play() {
@@ -91,8 +97,11 @@ class Album extends Component {
     }
 
   }
-  playAppear(index) {
+
+  playAppear(e) {
     this.setState({isHovering: true});
+    var targetIndex = e.target;
+    this.setState({ currentTargetIndex: targetIndex.innerText })
   }
 
   numberAppear() {
@@ -101,11 +110,12 @@ class Album extends Component {
 
   handlePlayAppear(song, index) {
     const isSameSong = this.state.currentSong === song;
-    const displayPlayIcon = <ion-icon name="play" onMouseEnter={() => this.playAppear()} onMouseLeave={() => this.numberAppear()}></ion-icon>
-    const displayPauseIcon = <ion-icon name="pause" onMouseEnter={() => this.playAppear()} onMouseLeave={() => this.numberAppear()}></ion-icon>
-    const displayTrackNumber = <span className="trackNumber"onMouseEnter={() => this.playAppear()} onMouseLeave={() => this.numberAppear()}>{index + 1}</span>
+    var currentIndex = index;
+    const displayPlayIcon = <ion-icon name="play" onMouseEnter={(e) => this.playAppear(e)} onMouseLeave={() => this.numberAppear()}></ion-icon>
+    const displayPauseIcon = <ion-icon name="pause" onMouseEnter={(e) => this.playAppear(e)} onMouseLeave={() => this.numberAppear()}></ion-icon>
+    const displayTrackNumber = <span id="trackNumber"onMouseEnter={(e) => this.playAppear(e)} onMouseLeave={() => this.numberAppear()}>{currentIndex + 1}</span>
 
-    if (this.state.isHovering && !isSameSong) {
+    if (this.state.currentTargetIndex == (currentIndex + 1)) {
       return displayPlayIcon;
     }
     if (this.state.isPlaying && isSameSong) {
@@ -117,6 +127,7 @@ class Album extends Component {
     if (!isSameSong) {
       return displayTrackNumber;
     }
+
   }
 
   handlePrevClick() {
@@ -161,9 +172,9 @@ class Album extends Component {
               <tbody>
               { this.state.album.songs.map( (song, index) =>
                     <tr className="song" key={song.title} onClick={() => this.handleSongClick(song)}>
-                      <td>{this.handlePlayAppear(song, index)}</td>
-                      <td>{song.title}</td>
-                      <td>{this.formatTime(song.duration)}</td>
+                      <td id='index'>{this.handlePlayAppear(song, index)}</td>
+                      <td id='songTitle'>{song.title}</td>
+                      <td id='time'>{this.formatTime(song.duration)}</td>
                   </tr>
                 )
               }
@@ -175,8 +186,8 @@ class Album extends Component {
               currentSong={this.state.currentSong}
               currentTime={this.audioElement.currentTime}
               duration={this.audioElement.duration}
-
               currentVolume={this.state.currentVolume}
+              currentTargetIndex={this.state.currentTargetIndex}
 
               handleSongClick={() => this.handleSongClick(this.state.currentSong)}
               handlePrevClick={() => this.handlePrevClick()}
@@ -184,6 +195,7 @@ class Album extends Component {
               handleTimeChange={(e) => this.handleTimeChange(e)}
               handleVolumeChange={(e) => this.handleVolumeChange(e)}
               formatTime={(newTime) => this.formatTime(newTime)}
+
             />
       </section>
     );
