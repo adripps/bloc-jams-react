@@ -51,6 +51,9 @@ class Album extends Component {
     }
     let minutes = newTime / 60;
     let seconds = newTime % 60;
+    if (seconds < 10) {
+      return parseInt(minutes) + ":0" + parseInt(seconds)
+    }
     return parseInt(minutes) + ":" + parseInt(seconds)
   }
 
